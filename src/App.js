@@ -1,8 +1,17 @@
 import React, {useState} from 'react'
 
+function computeInitialCounter() {
+  console.log('Some calculations')
+  return Math.trunc(Math.random() * 20)
+}
+
 function App() {
   //хук работает асинхронно
-  const [counter, setCounter] = useState(0)
+  //инициализируем state колбэком для хорошей оптимизации при вычислении
+  const [counter, setCounter] = useState(() => {
+    console.log('Some calculations')
+    return Math.trunc(Math.random() * 20)
+  })
 
   function increment(){
     // setCounter(counter +1 )
