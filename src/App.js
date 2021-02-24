@@ -8,16 +8,18 @@ function App() {
   const [value, setValue] = useState('initial')
   //useRef ввозвращает объект
   const renderCount = useRef(1)
+  const inputRef = useRef(null)
 
   useEffect(() => {
     renderCount.current++
+    console.log(inputRef.current)
   })
 
 
   return (
     <div>
       <h1>Количество рендеров: {renderCount.current}</h1>
-      <input type='text' onChange={e => setValue(e.target.value)} value={value}/>
+      <input ref={inputRef} type='text' onChange={e => setValue(e.target.value)} value={value}/>
     </div>
   );
 }
