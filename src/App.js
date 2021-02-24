@@ -1,48 +1,21 @@
 import React, {useState, useEffect} from 'react'
 
+let renderCount = 1
 
 function App() {
-  const [type, setType] = useState('users')
-  const [data, setData] = useState([])
-  const [pos, setPos] = useState({x: 0, y: 0})
 
-  // useEffect( () => {
-  //   console.log('render')
-  // })
+  //const [renderCount, setRenderCount] = useState(1)
+  const [value, setValue] = useState('initial')
 
   useEffect(() => {
-    fetch(`https://jsonplaceholder.typicode.com/${type}`)
-        .then(response => response.json())
-        .then(json => setData(json))
-  }, [type])
+    renderCount++
+  })
 
-
-  function mousemoveHandler(event) {
-    setPos({
-      x: event.clientX,
-      y: event.clientY
-    })
-  }
-
-  useEffect(() => {
-    console.log('ComponentDidMount')
-
-    window.addEventListener('mousemove', mousemoveHandler)
-
-    return () => window.removeEventListener('mousemove', mousemoveHandler)
-
-  }, [])
 
   return (
     <div>
-      <h1>Ресурс: {type}</h1>
-
-      <button onClick={() => setType('users')}>Пользователи</button>
-      <button onClick={() => setType('todos')}>Todos</button>
-      <button onClick={() => setType('posts ')}>Посты</button>
-
-      {/*<pre>{JSON.stringify(data,null,2)}</pre>*/}
-      <pre>{JSON.stringify(pos,null,2)}</pre>
+      <h1>Количество рендеров: {renderCount}</h1>
+      <input type='text' onChange={e => setValue(e.target.value)} value={value}/>
     </div>
   );
 }
