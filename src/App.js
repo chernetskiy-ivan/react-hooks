@@ -4,6 +4,7 @@ import React, {useState, useEffect} from 'react'
 function App() {
   const [type, setType] = useState('users')
   const [data, setData] = useState([])
+  const [pos, setPos] = useState({x: 0, y: 0})
 
   // useEffect( () => {
   //   console.log('render')
@@ -16,8 +17,20 @@ function App() {
   }, [type])
 
 
+  function mousemoveHandler(event) {
+    setPos({
+      x: event.clientX,
+      y: event.clientY
+    })
+  }
+
   useEffect(() => {
     console.log('ComponentDidMount')
+
+    window.addEventListener('mousemove', mousemoveHandler)
+
+    return () => window.removeEventListener('mousemove', mousemoveHandler)
+
   }, [])
 
   return (
@@ -28,7 +41,8 @@ function App() {
       <button onClick={() => setType('todos')}>Todos</button>
       <button onClick={() => setType('posts ')}>Посты</button>
 
-      <pre>{JSON.stringify(data,null,2)}</pre>
+      {/*<pre>{JSON.stringify(data,null,2)}</pre>*/}
+      <pre>{JSON.stringify(pos,null,2)}</pre>
     </div>
   );
 }
