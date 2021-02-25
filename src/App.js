@@ -1,33 +1,22 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React,{useState} from 'react'
 
-//let renderCount = 1
+function complexCompute(number) {
+    let i = 0
+    while(i < 1000000000) i++
+    return number * 2
+}
 
 function App() {
 
-  //const [renderCount, setRenderCount] = useState(1)
-  const [value, setValue] = useState('initial')
-  //useRef ввозвращает объект
-  const renderCount = useRef(1)
-  const inputRef = useRef(null)
-    const prevValue = useRef('')
+    const [number, setNumber] = useState(42)
 
-  useEffect(() => {
-    renderCount.current++
-  })
-
-
-    useEffect( () => {
-        prevValue.currrent = value
-    }, [value])
-
-  const focus = () => inputRef.current.focus()
+    const computed = complexCompute(number)
 
   return (
     <div>
-      <h1>Количество рендеров: {renderCount.current}</h1>
-      <h2>Прошлое состояние: {prevValue.current}</h2>
-      <input ref={inputRef} type='text' onChange={e => setValue(e.target.value)} value={value}/>
-      <button className='btn btn-success' onClick={focus}>Фокус</button>
+        <h1>Вычисляемое ссвойство: {computed}</h1>
+        <button className='btn btn-success' onClick={() => setNumber(prev => prev + 1)}>Добавить</button>
+        <button className='btn btn-danger' onClick={() => setNumber(prev => prev - 1)}>Убрать</button>
     </div>
   );
 }
