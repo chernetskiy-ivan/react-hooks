@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useCallback} from 'react'
 import ItemsList from './ItemsList'
 
 function App() {
@@ -10,9 +10,9 @@ function App() {
         color: colored ? 'darkred' : 'black'
     }
 
-    const generateItemsFromAPI = () => {
+    const generateItemsFromAPI = useCallback(() => {
         return new Array(count).fill('').map((_,i) => `Элемент ${i + 1}`)
-    }
+    },[count])
 
   return (
     <div>
