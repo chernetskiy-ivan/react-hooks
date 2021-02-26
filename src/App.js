@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useMemo} from 'react'
 
 function complexCompute(number) {
     console.log('complexCompute')
@@ -16,7 +16,11 @@ function App() {
         color: colored ? 'darkred' : 'black'
     }
 
-    const computed = complexCompute(number)
+    //в useMemo указываем список зависимостей во втором параметре и мы увидим что
+    //изменить state colored не будет задерживаться
+    const computed = useMemo(() => {
+        return complexCompute(number)
+    }, [number])
 
   return (
     <div>
