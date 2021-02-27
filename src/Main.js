@@ -1,8 +1,8 @@
 import React from 'react'
-import {useAlertToggle} from './alert/AlertCotext'
+import {useAlert} from './alert/AlertCotext'
 
 export default function Main() {
-    const toggle = useAlertToggle()
+    const {toggle} = useAlert()
     return(
         <>
             <h1>Привет в примере с Context</h1>
